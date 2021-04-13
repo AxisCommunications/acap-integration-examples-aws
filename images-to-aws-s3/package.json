@@ -1,0 +1,9 @@
+{
+  "name": "images-to-aws-s3",
+  "description": "AWS SAM capable of receiving images from Axis Communications cameras and saving them in AWS S3",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "aws-sdk-mock": "^5.1.0"
+  }
+}
