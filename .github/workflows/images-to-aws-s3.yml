@@ -13,5 +13,5 @@ jobs:
       run:
         working-directory: images-to-aws-s3
     steps:
-      - name: Build SAM
-        run: sam build
+      - uses: actions/checkout@v2
+      - run: sam build
