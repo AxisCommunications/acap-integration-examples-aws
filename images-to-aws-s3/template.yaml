@@ -1,0 +1,137 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  AWS SAM capable of receiving images from Axis cameras and saving them in AWS S3.
+
+Resources:
+  Api:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      Auth:
+        Authorizers:
+          RequestBasedAuthorizer:
+            AuthorizerPayloadFormatVersion: 2.0
+            EnableSimpleResponses: true
+            FunctionArn: !GetAtt AuthorizerFunction.Arn
+            FunctionInvokeRole: !GetAtt AuthorizerFunctionInvokeRole.Arn
+            FunctionPayloadType: REQUEST
+            Identity:
+              QueryStrings:
+                - accessToken
+              ReauthorizeEvery: 300
+      Tags:
+        application: Images to AWS S3
+
+  AuthorizerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/authorizer/index.handler
+      Runtime: nodejs14.x
+      Policies:
+        - AWSSecretsManagerGetSecretValuePolicy:
+            SecretArn: !Ref ApiAccessToken
+      Environment:
+        Variables:
+          ACCESS_TOKEN_ID: !Ref ApiAccessToken
+      Tags:
+        application: Images to AWS S3
+
+  AuthorizerFunctionInvokeRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - apigateway.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Policies:
+        - PolicyName: InvokeAuthLambda
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - lambda:InvokeFunction
+                Resource: !GetAtt AuthorizerFunction.Arn
+      Tags:
+        - Key: application
+          Value: Images to AWS S3
+
+  ApiAccessToken:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      GenerateSecretString:
+        SecretStringTemplate: "{}"
+        GenerateStringKey: accessToken
+        ExcludePunctuation: true
+      Tags:
+        - Key: application
+          Value: Images to AWS S3
+
+  UploadToS3Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/upload-to-s3/index.handler
+      Runtime: nodejs14.x
+      Events:
+        Get:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref Api
+            Method: GET
+            Path: /
+        Post:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref Api
+            Auth:
+              Authorizer: RequestBasedAuthorizer
+            Method: POST
+            Path: /
+      Policies:
+        - S3WritePolicy:
+            BucketName: !Ref Bucket
+      Environment:
+        Variables:
+          BUCKET_NAME: !Ref Bucket
+      Tags:
+        application: Images to AWS S3
+
+  Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      Tags:
+        - Key: application
+          Value: Images to AWS S3
+
+Outputs:
+  AccessToken:
+    Description: >
+      The URL to AWS Secrets Manager where you will find your generated API access token.
+    Value: !Sub
+      - https://${Region}.console.aws.amazon.com/secretsmanager/home?region=${Region}#!/secret?name=${Name}-${Postfix}
+      - Region: !Ref AWS::Region
+        Name:
+          !Select [
+            0,
+            !Split ["-", !Select [6, !Split [":", !Ref ApiAccessToken]]],
+          ]
+        Postfix:
+          !Select [
+            1,
+            !Split ["-", !Select [6, !Split [":", !Ref ApiAccessToken]]],
+          ]
+
+  Bucket:
+    Description: The URL to the S3 bucket where you will find your images.
+    Value: !Sub
+      - https://console.aws.amazon.com/s3/buckets/${Name}
+      - Name: !Ref Bucket
+
+  Recipient:
+    Description: The URL to where your Axis Communications cameras should send their images.
+    Value: !GetAtt Api.ApiEndpoint

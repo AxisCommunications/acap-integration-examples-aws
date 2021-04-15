@@ -1,0 +1,17 @@
+name: Build images-to-aws-s3
+
+on:
+  push:
+    paths:
+      - .github/workflows/images-to-aws-s3.yml
+      - images-to-aws-s3/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: images-to-aws-s3
+    steps:
+      - uses: actions/checkout@v2
+      - run: sam build
