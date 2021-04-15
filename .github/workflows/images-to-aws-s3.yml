@@ -1,0 +1,13 @@
+name: Build images-to-aws-s3
+
+on:
+  push:
+    paths:
+      - .github/workflows/images-to-aws-s3.yml
+      - images-to-aws-s3/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello world!"
