@@ -3,7 +3,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
   },
-  "cSpell.words": [
-    "ACAP"
-  ]
+  "cSpell.words": ["ACAP"],
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow": ["/.github/workflows/*"]
+  }
 }
