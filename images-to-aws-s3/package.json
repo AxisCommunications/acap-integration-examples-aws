@@ -1,8 +1,17 @@
 {
   "name": "images-to-aws-s3",
-  "description": "AWS SAM capable of receiving images from Axis Communications cameras and saving them in AWS S3",
+  "description": "AWS SAM capable of receiving images from Axis cameras and saving them in AWS S3",
   "version": "1.0.0",
+  "license": "Apache-2.0",
   "private": true,
+  "homepage": "https://github.com/AxisCommunications/acap3-examples-aws",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AxisCommunications/acap3-examples-aws.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AxisCommunications/acap3-examples-aws/issues"
+  },
   "devDependencies": {
     "aws-sdk-mock": "^5.1.0"
   }

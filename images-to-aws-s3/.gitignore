@@ -1,3 +1,2 @@
-/.aws-sam
-/node_modules
+.aws-sam
 *.toml
