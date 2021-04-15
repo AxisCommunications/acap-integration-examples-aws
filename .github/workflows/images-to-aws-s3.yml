@@ -2,6 +2,8 @@ name: Build images-to-aws-s3
 
 on:
   push:
+    branches:
+      - '**'
     paths:
       - .github/workflows/images-to-aws-s3.yml
       - images-to-aws-s3/**
