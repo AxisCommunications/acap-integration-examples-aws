@@ -6,8 +6,7 @@
 
 In this example, we deploy the AWS resources required to receive and store the images, and configures the camera to send an image when a specific event occurs.
 
-
-
+![architecture](./assets/architecture.png)
 
 ## Table of contents
 

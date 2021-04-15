@@ -1,4 +1,4 @@
-# Axis Communications integrations into Amazon Web Services (AWS)
+# Axis integrations into Amazon Web Services (AWS)
 
 ## Getting started with the repo
 
