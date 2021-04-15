@@ -1,0 +1,72 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  AWS SAM capable of receiving images from Axis cameras and saving them in AWS S3.
+
+Resources:
+  Api:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      Tags:
+        application: Images to AWS S3
+
+  Secrets:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      GenerateSecretString:
+        SecretStringTemplate: "{}"
+        GenerateStringKey: "apiAccessToken"
+        ExcludePunctuation: true
+      Tags:
+        - Key: application
+          Value: Images to AWS S3
+
+  Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/index.handler
+      Runtime: nodejs14.x
+      Events:
+        Post:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref Api
+            Method: POST
+            Path: /
+        Get:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref Api
+            Method: GET
+            Path: /
+      Policies:
+        - AWSSecretsManagerGetSecretValuePolicy:
+            SecretArn: !Ref Secrets
+        - S3WritePolicy:
+            BucketName: !Ref Bucket
+      Environment:
+        Variables:
+          API_ACCESS_TOKEN_ID: !Ref Secrets
+          BUCKET_NAME: !Ref Bucket
+      Tags:
+        application: Images to AWS S3
+
+  Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      Tags:
+        - Key: application
+          Value: Images to AWS S3
+
+Outputs:
+  ApiAccessToken:
+    Description: >
+      The URL to AWS Secrets Manager where you will find your generated API access token.
+    Value: !Sub
+      - https://${Region}.console.aws.amazon.com/secretsmanager/home?region=${Region}#!/secret?name=${Name}-${Postfix}
+      - Region: !Ref AWS::Region
+        Name: !Select [ 0, !Split [ "-", !Select [ 6, !Split [ ":", !Ref Secrets ] ] ] ]
+        Postfix: !Select [ 1, !Split [ "-", !Select [ 6, !Split [ ":", !Ref Secrets ] ] ] ]
+  Recipient:
+    Description: The URL to where your Axis Communications cameras should send their images.
+    Value: !GetAtt Api.ApiEndpoint
