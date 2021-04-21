@@ -76,7 +76,7 @@ We have two alternatives when it comes to configuring the camera. The first alte
 
 ### Configure the camera using a bash script
 
-The bash script `configure-camera.sh` depends on *curl* and *xpath* being installed on your system, and should be called with the following positional arguments.
+The bash script `configure-camera.sh` depends on *curl* being installed on your system, and should be called with the following positional arguments.
 
 1. `address` - The IP address or hostname of the Axis camera
 1. `username` - The username used when accessing the Axis camera
@@ -84,7 +84,16 @@ The bash script `configure-camera.sh` depends on *curl* and *xpath* being instal
 1. `recipient` - The URL of the AWS API Gateway, defined as a CloudFormation output parameter
 1. `access token` - The access token authorizing requests, linked from a CloudFormation output parameter
 
-Once executed the camera will send a new image to your AWS S3 bucket every minute.
+The following output indicate a successful configuration, where the camera will start to send a new image to your AWS S3 bucket every minute.
+
+```bash
+./configure-camera.sh 192.168.0.90 root my-password https://my-recipient.com my-access-token
+Adding recipient...
+Adding schedule...
+Adding rule...
+
+Done!
+```
 
 ### Configure the camera using the user interface
 

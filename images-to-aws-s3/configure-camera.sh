@@ -41,6 +41,20 @@ send_request() {
     echo "Error: Request failed"
     echo
     echo "$resp"
+
+    exit 1
+  fi
+}
+
+parse_response() {
+  local resp=$1
+  local regex=$2
+
+  if ! [[ $resp =~ $regex ]]; then
+    echo "Error: Parsing response failed"
+    echo
+    echo "$resp"
+
     exit 1
   fi
 }
@@ -91,7 +105,8 @@ RRULE:FREQ=MINUTELY;INTERVAL=1</aev:ICalendar>
   </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>"
 
-schedule_id=$(echo "$resp" | xpath -q -e '/SOAP-ENV:Envelope/SOAP-ENV:Body/aev:AddScheduledEventResponse/aev:EventID/text()')
+parse_response "$resp" "<aev:EventID>(.*)</aev:EventID>"
+schedule_id="${BASH_REMATCH[1]}"
 
 echo "Adding rule..."
 
@@ -128,7 +143,8 @@ send_request \
   </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>"
 
-action_id=$(echo "$resp" | xpath -q -e '/SOAP-ENV:Envelope/SOAP-ENV:Body/aa:AddActionConfigurationResponse/aa:ConfigurationID/text()')
+parse_response "$resp" "<aa:ConfigurationID>(.*)</aa:ConfigurationID>"
+action_id="${BASH_REMATCH[1]}"
 
 send_request \
 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
