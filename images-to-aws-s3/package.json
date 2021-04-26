@@ -11,8 +11,5 @@
   },
   "bugs": {
     "url": "https://github.com/AxisCommunications/acap3-examples-aws/issues"
-  },
-  "devDependencies": {
-    "aws-sdk-mock": "^5.1.0"
   }
 }
