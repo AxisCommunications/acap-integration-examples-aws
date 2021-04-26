@@ -135,7 +135,7 @@ At this point the rule will become active and send an image to AWS S3 every minu
 
 ## Cleanup
 
-To delete the deployed AWS resources, either use the AWS Console, or delete the CloudFormation stack using the AWS CLI in your shell.
+To delete the deployed AWS resources, delete the CloudFormation stack either via the AWS Console or via the AWS CLI using the following command.
 
 ```bash
 aws cloudformation delete-stack --stack-name <CloudFormation stack name>
