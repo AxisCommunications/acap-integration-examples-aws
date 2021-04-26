@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+"use strict";
+
 const response = (statusCode) => {
   return {
     statusCode,

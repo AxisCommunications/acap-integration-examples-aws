@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+"use strict";
+
 const AWS = require("aws-sdk");
 const env = require("./env");
 
