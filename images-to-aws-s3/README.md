@@ -24,7 +24,7 @@ The application consists of the following AWS resources.
 - Secret stored in Secrets Manager
 - S3 bucket
 
-Sending images from an Axis camera directly to AWS S3 would be the ideal solution, but unfortunately the camera is unable to sign requests using [AWS Signature Version 4](https://docs.aws.zamazon.com/general/latest/gr/signature-version-4.html). Because of this we send the requests to a API Gateway, which then forwards them to the Lambda function. In the Lambda function we authorize the request by comparing the provided access token to an access token stored in Secrets Manager. If the provided access token is deemed valid the function proceeds with uploading the provided image to a AWS S3 bucket.
+Sending images from an Axis camera directly to AWS S3 would be the ideal solution, but unfortunately the camera is unable to sign requests using [AWS Signature Version 4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html). Because of this we send the requests to an API Gateway, which then forwards them to the Lambda function. In the Lambda function we authorize the request by comparing the provided access token to an access token stored in Secrets Manager. If the provided access token is deemed valid the function proceeds with uploading the provided image to an AWS S3 bucket.
 
 ## Prerequisites
 
