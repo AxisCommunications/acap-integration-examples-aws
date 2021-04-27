@@ -37,10 +37,15 @@ As the camera is not able to sign requests using [AWS Signature Version 4](https
 ```
 images-to-aws-s3
 ├── src
-│   ├── env.js - Exports environment variables
-│   ├── index.js - Exports the AWS Lambda handler function
-│   ├── response.js - Exports common HTTP responses
-│   └── secrets.js - Exports a function capable of reading the access token from AWS Secrets Manager
+│   ├── authorizer - contains code authorizing requests to AWS API Gateway
+│   │   ├── env.js - Exports environment variables
+│   │   ├── index.js - Exports the AWS Lambda handler function
+│   │   └── secrets.js - Exports a function capable of reading the access token from AWS Secrets Manager
+│   └── upload-to-s3 - contains code uploading images to AWS S3
+│       ├── env.js - Exports environment variables
+│       ├── index.js - Exports the AWS Lambda handler function
+│       └── response.js - Exports common HTTP responses
+├── .npmignore - npm package ignore file
 ├── configure-camera.sh - bash script capable of configuring an Axis camera to send images
 ├── package-lock.json - npm package lock file
 ├── package.json - npm package
