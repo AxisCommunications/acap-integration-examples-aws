@@ -10,7 +10,15 @@ Resources:
       Tags:
         application: Images to AWS S3
 
-  Secrets:
+  ApiAuthorizerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/authorizer/index.handler
+      Runtime: nodejs14.x
+      Tags:
+        application: Images to AWS S3
+
+  ApiAccessToken:
     Type: AWS::SecretsManager::Secret
     Properties:
       GenerateSecretString:
@@ -21,10 +29,10 @@ Resources:
         - Key: application
           Value: Images to AWS S3
 
-  Function:
+  UploadToS3Function:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/index.handler
+      Handler: src/upload-to-s3/index.handler
       Runtime: nodejs14.x
       Events:
         Post:
@@ -41,12 +49,12 @@ Resources:
             Path: /
       Policies:
         - AWSSecretsManagerGetSecretValuePolicy:
-            SecretArn: !Ref Secrets
+            SecretArn: !Ref ApiAccessToken
         - S3WritePolicy:
             BucketName: !Ref Bucket
       Environment:
         Variables:
-          API_ACCESS_TOKEN_ID: !Ref Secrets
+          API_ACCESS_TOKEN_ID: !Ref ApiAccessToken
           BUCKET_NAME: !Ref Bucket
       Tags:
         application: Images to AWS S3
@@ -65,8 +73,8 @@ Outputs:
     Value: !Sub
       - https://${Region}.console.aws.amazon.com/secretsmanager/home?region=${Region}#!/secret?name=${Name}-${Postfix}
       - Region: !Ref AWS::Region
-        Name: !Select [ 0, !Split [ "-", !Select [ 6, !Split [ ":", !Ref Secrets ] ] ] ]
-        Postfix: !Select [ 1, !Split [ "-", !Select [ 6, !Split [ ":", !Ref Secrets ] ] ] ]
+        Name: !Select [ 0, !Split [ "-", !Select [ 6, !Split [ ":", !Ref ApiAccessToken ] ] ] ]
+        Postfix: !Select [ 1, !Split [ "-", !Select [ 6, !Split [ ":", !Ref ApiAccessToken ] ] ] ]
   Recipient:
     Description: The URL to where your Axis Communications cameras should send their images.
     Value: !GetAtt Api.ApiEndpoint
