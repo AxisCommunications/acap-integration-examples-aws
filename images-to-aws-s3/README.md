@@ -20,11 +20,12 @@ In this example we create an application that sends images from an Axis camera t
 The application consists of the following AWS resources.
 
 - API Gateway
+- API Gateway Lambda authorizer
+- Access token stored in Secrets Manager
 - Lambda function
-- Secret stored in Secrets Manager
 - S3 bucket
 
-As the camera is not able to sign requests using [AWS Signature Version 4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) we need to include a Lambda function to handle this step. Rather than sending images directly from the Axis camera to AWS S3 we instead send them to an API Gateway which then forwards them to the Lambda function. In the function we authorize the request by comparing the provided access token to an access token stored in Secrets Manager. If the provided access token is deemed valid the function proceeds with uploading the provided image to an AWS S3 bucket.
+As the camera is not able to sign requests using [AWS Signature Version 4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) we need to include a Lambda function to handle this step. Rather than sending images directly from the Axis camera to AWS S3 we instead send them to an API Gateway. The API Gateway uses a Lambda authorizer that compares the provided access token to an access token stored in Secrets Manager. If the provided access token is deemed valid the API Gateway forwards the request to a Lambda function which proceeds with uploading the provided image to an AWS S3 bucket.
 
 ## Prerequisites
 
