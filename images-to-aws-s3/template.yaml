@@ -12,8 +12,8 @@ Resources:
           RequestBasedAuthorizer:
             AuthorizerPayloadFormatVersion: 2.0
             EnableSimpleResponses: true
-            FunctionArn: !GetAtt ApiAuthorizerFunction.Arn
-            FunctionInvokeRole: !GetAtt ApiAuthorizerFunctionInvokeRole.Arn
+            FunctionArn: !GetAtt AuthorizerFunction.Arn
+            FunctionInvokeRole: !GetAtt AuthorizerFunctionInvokeRole.Arn
             FunctionPayloadType: REQUEST
             Identity:
               QueryStrings:
@@ -22,15 +22,21 @@ Resources:
       Tags:
         application: Images to AWS S3
 
-  ApiAuthorizerFunction:
+  AuthorizerFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: src/authorizer/index.handler
       Runtime: nodejs14.x
+      Policies:
+        - AWSSecretsManagerGetSecretValuePolicy:
+            SecretArn: !Ref ApiAccessToken
+      Environment:
+        Variables:
+          API_ACCESS_TOKEN_ID: !Ref ApiAccessToken
       Tags:
         application: Images to AWS S3
 
-  ApiAuthorizerFunctionInvokeRole:
+  AuthorizerFunctionInvokeRole:
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
@@ -42,7 +48,6 @@ Resources:
                 - apigateway.amazonaws.com
             Action:
               - sts:AssumeRole
-      # Path: "/service-role/"
       Policies:
         - PolicyName: InvokeAuthLambda
           PolicyDocument:
@@ -51,7 +56,7 @@ Resources:
               - Effect: Allow
                 Action:
                   - lambda:InvokeFunction
-                Resource: !GetAtt ApiAuthorizerFunction.Arn
+                Resource: !GetAtt AuthorizerFunction.Arn
 
   ApiAccessToken:
     Type: AWS::SecretsManager::Secret

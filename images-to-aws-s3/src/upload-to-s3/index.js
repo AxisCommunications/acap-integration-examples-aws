@@ -19,17 +19,10 @@
 const AWS = require("aws-sdk");
 const env = require("./env");
 const response = require("./response");
-const secrets = require("./secrets");
 
 const s3 = new AWS.S3();
 
 const post = async (event) => {
-  const apiAccessToken = await secrets.getApiAccessToken();
-
-  if (event?.queryStringParameters?.accessToken !== apiAccessToken) {
-    return response.Forbidden;
-  }
-
   const contentType = event.headers["content-type"];
   if (!contentType || !contentType.startsWith("image/")) {
     return response.UnsupportedMediaType;

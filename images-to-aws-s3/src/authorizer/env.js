@@ -16,19 +16,8 @@
 
 "use strict";
 
-const secrets = require("./secrets");
-
-const handler = async (event) => {
-  console.log(event);
-
-  const apiAccessToken = await secrets.getApiAccessToken();
-  const isAuthorized = event.queryStringParameters?.accessToken === apiAccessToken;
-
-  return {
-    isAuthorized,
-  };
-};
+const apiAccessTokenId = process.env.API_ACCESS_TOKEN_ID;
 
 module.exports = {
-  handler,
+  apiAccessTokenId,
 };

@@ -17,9 +17,7 @@
 "use strict";
 
 const bucketName = process.env.BUCKET_NAME;
-const apiAccessTokenId = process.env.API_ACCESS_TOKEN_ID;
 
 module.exports = {
   bucketName,
-  apiAccessTokenId,
 };
