@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: 2010-09-09
 Transform: AWS::Serverless-2016-10-31
 Description: >
   AWS SAM capable of receiving images from Axis cameras and saving them in AWS S3.
@@ -40,7 +40,7 @@ Resources:
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
-        Version: '2012-10-17'
+        Version: 2012-10-17
         Statement:
           - Effect: Allow
             Principal:
@@ -51,19 +51,22 @@ Resources:
       Policies:
         - PolicyName: InvokeAuthLambda
           PolicyDocument:
-            Version: '2012-10-17'
+            Version: 2012-10-17
             Statement:
               - Effect: Allow
                 Action:
                   - lambda:InvokeFunction
                 Resource: !GetAtt AuthorizerFunction.Arn
+      Tags:
+        - Key: application
+          Value: Images to AWS S3
 
   ApiAccessToken:
     Type: AWS::SecretsManager::Secret
     Properties:
       GenerateSecretString:
         SecretStringTemplate: "{}"
-        GenerateStringKey: "apiAccessToken"
+        GenerateStringKey: apiAccessToken
         ExcludePunctuation: true
       Tags:
         - Key: application
@@ -90,13 +93,10 @@ Resources:
             Method: POST
             Path: /
       Policies:
-        - AWSSecretsManagerGetSecretValuePolicy:
-            SecretArn: !Ref ApiAccessToken
         - S3WritePolicy:
             BucketName: !Ref Bucket
       Environment:
         Variables:
-          API_ACCESS_TOKEN_ID: !Ref ApiAccessToken
           BUCKET_NAME: !Ref Bucket
       Tags:
         application: Images to AWS S3
@@ -115,8 +115,16 @@ Outputs:
     Value: !Sub
       - https://${Region}.console.aws.amazon.com/secretsmanager/home?region=${Region}#!/secret?name=${Name}-${Postfix}
       - Region: !Ref AWS::Region
-        Name: !Select [ 0, !Split [ "-", !Select [ 6, !Split [ ":", !Ref ApiAccessToken ] ] ] ]
-        Postfix: !Select [ 1, !Split [ "-", !Select [ 6, !Split [ ":", !Ref ApiAccessToken ] ] ] ]
+        Name:
+          !Select [
+            0,
+            !Split ["-", !Select [6, !Split [":", !Ref ApiAccessToken]]],
+          ]
+        Postfix:
+          !Select [
+            1,
+            !Split ["-", !Select [6, !Split [":", !Ref ApiAccessToken]]],
+          ]
   Recipient:
     Description: The URL to where your Axis Communications cameras should send their images.
     Value: !GetAtt Api.ApiEndpoint
