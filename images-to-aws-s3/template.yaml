@@ -8,12 +8,13 @@ Resources:
     Type: AWS::Serverless::HttpApi
     Properties:
       Auth:
-        DefaultAuthorizer: RequestBasedAuthorizer
         Authorizers:
           RequestBasedAuthorizer:
             AuthorizerPayloadFormatVersion: 2.0
-            FunctionArn: !GetAtt ApiAuthorizerFunction.Arn
             EnableSimpleResponses: true
+            FunctionArn: !GetAtt ApiAuthorizerFunction.Arn
+            FunctionInvokeRole: !GetAtt ApiAuthorizerFunctionInvokeRole.Arn
+            FunctionPayloadType: REQUEST
             Identity:
               QueryStrings:
                 - accessToken
@@ -28,6 +29,29 @@ Resources:
       Runtime: nodejs14.x
       Tags:
         application: Images to AWS S3
+
+  ApiAuthorizerFunctionInvokeRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - apigateway.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      # Path: "/service-role/"
+      Policies:
+        - PolicyName: InvokeAuthLambda
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - lambda:InvokeFunction
+                Resource: !GetAtt ApiAuthorizerFunction.Arn
 
   ApiAccessToken:
     Type: AWS::SecretsManager::Secret
@@ -46,17 +70,19 @@ Resources:
       Handler: src/upload-to-s3/index.handler
       Runtime: nodejs14.x
       Events:
-        Post:
-          Type: HttpApi
-          Properties:
-            ApiId: !Ref Api
-            Method: POST
-            Path: /
         Get:
           Type: HttpApi
           Properties:
             ApiId: !Ref Api
             Method: GET
+            Path: /
+        Post:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref Api
+            Auth:
+              Authorizer: RequestBasedAuthorizer
+            Method: POST
             Path: /
       Policies:
         - AWSSecretsManagerGetSecretValuePolicy:
