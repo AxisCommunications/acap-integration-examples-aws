@@ -19,7 +19,7 @@
 const secrets = require("./secrets");
 
 const handler = async (event) => {
-  console.log(event);
+  // TODO: Log event to see the identity and access token
 
   const apiAccessToken = await secrets.getApiAccessToken();
   const isAuthorized = event.queryStringParameters?.accessToken === apiAccessToken;

@@ -22,7 +22,11 @@ const response = require("./response");
 
 const s3 = new AWS.S3();
 
-const post = async (event) => {
+const getHandler = async () => {
+  return response.OK;
+};
+
+const postHandler = async (event) => {
   const contentType = event.headers["content-type"];
   if (!contentType || !contentType.startsWith("image/")) {
     return response.UnsupportedMediaType;
@@ -36,6 +40,7 @@ const post = async (event) => {
   const filename = contentDisposition.match(
     /^attachment;\s*filename=\"(?<filename>.*)\"$/
   )?.groups?.filename;
+
   if (!filename) {
     return response.BadRequest;
   }
@@ -54,17 +59,13 @@ const post = async (event) => {
   return response.OK;
 };
 
-const get = async () => {
-  return response.OK;
-};
-
 const handler = async (event) => {
   switch (event.requestContext.http.method) {
     case "GET":
-      return get();
+      return getHandler();
 
     case "POST":
-      return post(event);
+      return postHandler(event);
 
     default:
       return response.MethodNotAllowed;
