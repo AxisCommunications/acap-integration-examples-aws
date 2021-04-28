@@ -38,11 +38,11 @@ As the camera is not able to sign requests using [AWS Signature Version 4](https
 ```
 images-to-aws-s3
 ├── src
-│   ├── authorizer - contains code authorizing requests to AWS API Gateway
+│   ├── authorizer - Contains code authorizing requests to AWS API Gateway
 │   │   ├── env.js - Exports environment variables
 │   │   ├── index.js - Exports the AWS Lambda handler function
 │   │   └── secrets.js - Exports a function capable of reading the access token from AWS Secrets Manager
-│   └── upload-to-s3 - contains code uploading images to AWS S3
+│   └── upload-to-s3 - Contains code uploading images to AWS S3
 │       ├── env.js - Exports environment variables
 │       ├── index.js - Exports the AWS Lambda handler function
 │       └── response.js - Exports common HTTP responses
