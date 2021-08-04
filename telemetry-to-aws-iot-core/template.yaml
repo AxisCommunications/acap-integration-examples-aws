@@ -1,0 +1,48 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: AWS CloudFormation template capable of registering an AWS IoT Core Thing.
+
+Parameters:
+  ThingName:
+    Type: String
+    Description: The name of the AWS IoT Core Thing.
+
+  CertificateArn:
+    Type: String
+    Description: >
+      The ARN of the X.509 certificate acting as principal for the AWS IoT Core Thing.
+
+Resources:
+  Policy:
+    Type: AWS::IoT::Policy
+    Properties:
+      PolicyName: publish
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Action: iot:Connect
+            Resource: !Sub
+              - arn:aws:iot:${AWS::Region}:${AWS::AccountId}:client/${ThingName}
+              - ThingName: ${iot:Connection.Thing.ThingName}
+          - Effect: Allow
+            Action: iot:Publish
+            Resource: !Sub
+              - arn:aws:iot:${AWS::Region}:${AWS::AccountId}:topic/${ThingName}/*
+              - ThingName: ${iot:Connection.Thing.ThingName}
+
+  PolicyPrincipalAttachment:
+    Type: AWS::IoT::PolicyPrincipalAttachment
+    Properties:
+      PolicyName: !Ref Policy
+      Principal: !Ref CertificateArn
+
+  Thing:
+    Type: AWS::IoT::Thing
+    Properties:
+      ThingName: !Ref ThingName
+
+  ThingPrincipalAttachment:
+    Type: AWS::IoT::ThingPrincipalAttachment
+    Properties:
+      ThingName: !Ref Thing
+      Principal: !Ref CertificateArn
