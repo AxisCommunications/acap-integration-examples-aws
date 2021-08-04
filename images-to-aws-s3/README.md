@@ -11,6 +11,7 @@
 - [File structure](#file-structure)
 - [Instructions](#instructions)
 - [Cleanup](#cleanup)
+- [Troubleshooting](#troubleshooting)
 - [License](#license)
 
 ## Overview
@@ -133,6 +134,16 @@ To delete the deployed AWS resources, delete the CloudFormation stack either via
 ```bash
 aws cloudformation delete-stack --stack-name <CloudFormation stack name>
 ```
+
+## Troubleshooting
+
+This section will highlight some of the common problems one might encounter when running this example application.
+
+### No images are sent to AWS S3
+
+If the camera is unable to successfully send images to AWS S3, please make sure that the following statements are true.
+
+- **The camera is not behind a proxy**. This example does not support a network topology where requests needs to traverse a proxy to reach the internet.
 
 ## License
 
