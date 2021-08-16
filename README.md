@@ -18,7 +18,9 @@ The repository contains a set of examples, each tailored towards a specific prob
 If you find yourself wishing there was another example more relevant to your use case, please don't hesitate to [start a discussion](https://github.com/AxisCommunications/acap-integration-examples-aws/discussions/new) or [open a new issue](https://github.com/AxisCommunications/acap-integration-examples-aws/issues/new/choose).
 
 - [images-to-aws-s3](./images-to-aws-s3/)
-  - This example covers sending images from a camera to AWS S3
+    - This example covers sending images from a camera to AWS S3
+- [telemetry-to-aws-iot-core](./telemetry-to-aws-iot-core/)
+    - This example covers sending telemetry from a camera to AWS IoT Core
 
 ## License
 

@@ -52,7 +52,7 @@ images-to-aws-s3
 ├── .npmignore - npm package ignore file
 ├── package-lock.json - npm package lock file
 ├── package.json - npm package
-└── template.yaml - SAM template describing the AWS resources
+└── template.yaml - AWS SAM template describing the AWS resources
 ```
 
 ## Instructions

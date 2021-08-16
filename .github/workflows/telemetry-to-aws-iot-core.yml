@@ -1,0 +1,19 @@
+name: Build telemetry-to-aws-iot-core
+
+on:
+  push:
+    paths:
+      - .github/workflows/telemetry-to-aws-iot-core.yml
+      - telemetry-to-aws-iot-core/**
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: telemetry-to-aws-iot-core
+    steps:
+      - uses: actions/checkout@v2
+      - run: pip install --upgrade pip cfn-lint
+      - run: cfn-lint template.yaml
