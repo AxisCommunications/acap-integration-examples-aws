@@ -1,0 +1,17 @@
+{
+  "extends": ["config:base", ":prHourlyLimitNone"],
+  "labels": ["dependencies"],
+  "packageRules": [
+    {
+      "updateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    }
+  ],
+  "rebaseWhen": "behind-base-branch",
+  "vulnerabilityAlerts": {
+    "labels": ["security"]
+  },
+  "stabilityDays": 7,
+  "prCreation": "not-pending",
+  "dependencyDashboard": true
+}
