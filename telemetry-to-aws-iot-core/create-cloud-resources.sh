@@ -40,14 +40,22 @@ get_certificate_arn() {
     --output text 2>&1; exit 0)
 }
 
+# -----------------------------------------------------------------------------
+# CREATE CERTIFICATES
+# -----------------------------------------------------------------------------
+
 mkdir -p $cert_directory
 
+# We want to use X.509 certificates to authenticate our camera to AWS IoT Core, and the first step
+# is to download the AWS CA certificate to a new directory called 'cert'.
 if [ ! -f "$ca_cert_path" ]; then
   echo "Downloading Amazon root CA certificate..."
   curl -s https://www.amazontrust.com/repository/AmazonRootCA1.pem > $ca_cert_path
   echo "    $ca_cert_path"
 fi
 
+# Next we will create a new certificate in AWS IoT Core, acting as the principal identity for the
+# AWS IoT Core Thing.
 if [ -f "$principal_cert_id_path" ]; then
   get_certificate_arn
 
@@ -77,16 +85,26 @@ if [ -z "$principal_cert_arn" ]; then
   echo "    $principal_key_path"
 fi
 
+# -----------------------------------------------------------------------------
+# PROVISION AWS RESOURCES
+# -----------------------------------------------------------------------------
+
+# At this point we are ready to deploy the AWS CloudFormation template defined in `template.yaml`.
 echo "Deploy AWS CloudFormation template..."
 aws cloudformation deploy \
   --stack-name $stack_name \
   --template-file template.yaml \
   --parameter-overrides ThingName=$thing_name CertificateArn=$principal_cert_arn
 
+# The final step is to query AWS IoT Core for the data endpoint.
 endpointAddress=$(aws iot describe-endpoint \
   --endpoint-type iot:Data-ATS \
   --query endpointAddress \
   --output text)
+
+# -----------------------------------------------------------------------------
+# OUTPUT
+# -----------------------------------------------------------------------------
 
 echo
 echo "Done!"
