@@ -1,10 +1,10 @@
 *Copyright (C) 2021, Axis Communications AB, Lund, Sweden. All Rights Reserved.*
 
-# Telemetry to AWS IoT Core
+# Telemetry to AWS IoT Core <!-- omit in toc -->
 
 [![Build telemetry-to-aws-iot-core](https://github.com/AxisCommunications/acap-integration-examples-aws/actions/workflows/telemetry-to-aws-iot-core.yml/badge.svg)](https://github.com/AxisCommunications/acap-integration-examples-aws/actions/workflows/telemetry-to-aws-iot-core.yml)
 
-## Table of contents
+## Table of contents <!-- omit in toc -->
 
 - [Overview](#overview)
 - [Prerequisites](#prerequisites)

@@ -1,10 +1,10 @@
 *Copyright (C) 2021, Axis Communications AB, Lund, Sweden. All Rights Reserved.*
 
-# Sending images from a camera to AWS S3
+# Sending images from a camera to AWS S3 <!-- omit in toc -->
 
 [![Build images-to-aws-s3](https://github.com/AxisCommunications/acap-integration-examples-aws/actions/workflows/images-to-aws-s3.yml/badge.svg)](https://github.com/AxisCommunications/acap-integration-examples-aws/actions/workflows/images-to-aws-s3.yml)
 
-## Table of contents
+## Table of contents <!-- omit in toc -->
 
 - [Overview](#overview)
 - [Prerequisites](#prerequisites)
