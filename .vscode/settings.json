@@ -4,6 +4,7 @@
     "editor.formatOnSave": true
   },
   "cSpell.words": ["ACAP"],
+  "markdown.extension.toc.levels": "1..2",
   "yaml.schemas": {
     "https://json.schemastore.org/github-workflow": ["/.github/workflows/*"]
   }
