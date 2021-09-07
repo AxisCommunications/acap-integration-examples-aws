@@ -55,14 +55,10 @@ cd acap-integration-examples-aws/telemetry-to-aws-iot-core
 
 ### Deploy AWS resources
 
-Let's deploy the AWS resources required to receive telemetry from a camera. We have two alternatives when it comes to deploying the AWS resources. The first alternative is to run a bash script that performs all the necessary commands. The second alternative is to run all the commands manually.
-
-#### Deploy AWS resources using a bash script
-
-The bash script `create-cloud-resources.sh` should be called with the following positional arguments.
+Let's deploy the AWS resources required to receive telemetry from a camera. The bash script `create-cloud-resources.sh` should be called with the following positional arguments.
 
 1. **Stack name**: The name of the AWS CloudFormation stack, e.g. `axis-device-telemetry`
-1. **Thing name**: The name of the AWS IoT Core Thing, e.g. `device01`
+2. **Thing name**: The name of the AWS IoT Core Thing, e.g. `device01`
 
 The following output indicates that all resources have been created successfully.
 
@@ -89,57 +85,6 @@ $ ./create-cloud-resources.sh axis-device-telemetry device01
 ```
 
 We will use the MQTT host and client id in the upcoming chapter where we configure the camera.
-
-#### Deploy AWS resources manually
-
-We want to use X.509 certificates to authenticate our camera to AWS IoT Core, and the first step is to download the AWS CA certificate to a new directory called `cert`.
-
-```bash
-mkdir -p cert
-curl https://www.amazontrust.com/repository/AmazonRootCA1.pem > ./cert/AmazonRootCA1.pem
-```
-
-Next we will create a new certificate in AWS IoT Core, acting as the principal identity for the AWS IoT Core Thing. In this example we will give our Thing the name `device01`.
-
-```bash
-thing_name=device01
-cert_arn=$(aws iot create-keys-and-certificate \
-  --set-as-active \
-  --certificate-pem-outfile ./cert/$thing_name.crt \
-  --private-key-outfile ./cert/$thing_name.key \
-  --query certificateArn \
-  --output text)
-```
-
-At this point we are ready to deploy the AWS CloudFormation template defined in `template.yaml`. In this example we name the stack `axis-device-telemetry`.
-
-```bash
-stack_name=axis-device-telemetry
-aws cloudformation deploy \
-  --stack-name $stack_name \
-  --template-file template.yaml \
-  --parameter-overrides ThingName=$thing_name CertificateArn=$cert_arn
-```
-
-The final step is to query AWS IoT Core for the data endpoint.
-
-```bash
-endpointAddress=$(aws iot describe-endpoint \
-  --endpoint-type iot:Data-ATS \
-  --query endpointAddress \
-  --output text)
-```
-
-Now we have everything we need and can view our MQTT host and client id with the following commands.
-
-```
-$ echo "Host: $endpointAddress"
-> Host: abcdefghijklmn-ats.iot.us-west-1.amazonaws.com
-$ echo "Client id: $thing_name"
-> Client id: device01
-```
-
-We will use these parameters in the next chapter where we configure the camera.
 
 ### Configure the camera
 
