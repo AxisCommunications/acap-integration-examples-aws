@@ -3,7 +3,7 @@
 # Sending images from a camera to AWS S3 <!-- omit in toc -->
 
 [![Build images-to-aws-s3](https://github.com/AxisCommunications/acap-integration-examples-aws/actions/workflows/images-to-aws-s3.yml/badge.svg)](https://github.com/AxisCommunications/acap-integration-examples-aws/actions/workflows/images-to-aws-s3.yml)
-![Ready for production](https://img.shields.io/badge/Ready%20for%20production-Yes-brightgreen)
+![Ready for use in production](https://img.shields.io/badge/Ready%20for%20use%20in%20production-Yes-brightgreen)
 
 ## Table of contents <!-- omit in toc -->
 

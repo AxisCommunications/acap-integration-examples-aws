@@ -3,7 +3,7 @@
 # Telemetry to AWS IoT Core <!-- omit in toc -->
 
 [![Build telemetry-to-aws-iot-core](https://github.com/AxisCommunications/acap-integration-examples-aws/actions/workflows/telemetry-to-aws-iot-core.yml/badge.svg)](https://github.com/AxisCommunications/acap-integration-examples-aws/actions/workflows/telemetry-to-aws-iot-core.yml)
-![Ready for production](https://img.shields.io/badge/Ready%20for%20production-Yes-brightgreen)
+![Ready for use in production](https://img.shields.io/badge/Ready%20for%20use%20in%20production-Yes-brightgreen)
 
 ## Table of contents <!-- omit in toc -->
 
