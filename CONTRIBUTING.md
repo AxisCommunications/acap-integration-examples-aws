@@ -29,7 +29,7 @@ $ git checkout -b <branch name>
 **Commit your changes**
 
 ```bash
-$ git commit -a -m "Follow the conventional commit messages style to write this message"
+$ git commit -a -m 'Follow the conventional commit messages style to write this message'
 ```
 
 **Push to the branch**
