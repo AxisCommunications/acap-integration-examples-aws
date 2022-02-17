@@ -1,18 +1,23 @@
 *Copyright (C) 2021, Axis Communications AB, Lund, Sweden. All Rights Reserved.*
 
-# Telemetry to AWS IoT Core <!-- omit in toc -->
+<!-- omit in toc -->
+# Telemetry to AWS IoT Core
 
 [![Build telemetry-to-aws-iot-core](https://github.com/AxisCommunications/acap-integration-examples-aws/actions/workflows/telemetry-to-aws-iot-core.yml/badge.svg)](https://github.com/AxisCommunications/acap-integration-examples-aws/actions/workflows/telemetry-to-aws-iot-core.yml)
 ![Ready for use in production](https://img.shields.io/badge/Ready%20for%20use%20in%20production-Yes-brightgreen)
 
-## Table of contents <!-- omit in toc -->
+<!-- omit in toc -->
+## Table of contents
 
 - [Overview](#overview)
 - [Prerequisites](#prerequisites)
 - [File structure](#file-structure)
 - [Instructions](#instructions)
+  - [Deploy AWS resources](#deploy-aws-resources)
+  - [Configure the camera](#configure-the-camera)
 - [Cleanup](#cleanup)
 - [Troubleshooting](#troubleshooting)
+  - [MQTT client cannot connect to AWS IoT Core](#mqtt-client-cannot-connect-to-aws-iot-core)
 - [License](#license)
 
 ## Overview
