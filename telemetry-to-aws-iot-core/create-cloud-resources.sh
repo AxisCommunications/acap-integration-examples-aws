@@ -36,7 +36,7 @@ export AWS_PAGER=
 get_certificate_arn() {
   resp=$(
     aws iot describe-certificate \
-      --certificate-id "$(cat $principal_cert_id_path)" \
+      --certificate-id "$(cat "$principal_cert_id_path")" \
       --query certificateDescription.certificateArn \
       --output text 2>&1
     exit 0
@@ -75,11 +75,11 @@ if [ -z "$principal_cert_arn" ]; then
 
   aws iot create-keys-and-certificate \
     --set-as-active \
-    --certificate-pem-outfile $principal_cert_path \
-    --private-key-outfile $principal_key_path \
+    --certificate-pem-outfile "$principal_cert_path" \
+    --private-key-outfile "$principal_key_path" \
     --output text \
     --query certificateId \
-    >$principal_cert_id_path
+    >"$principal_cert_id_path"
 
   get_certificate_arn
   principal_cert_arn=$resp
@@ -95,9 +95,9 @@ fi
 # At this point we are ready to deploy the AWS CloudFormation template defined in `template.yaml`.
 echo "Deploy AWS CloudFormation template..."
 aws cloudformation deploy \
-  --stack-name $stack_name \
+  --stack-name "$stack_name" \
   --template-file template.yaml \
-  --parameter-overrides ThingName=$thing_name CertificateArn=$principal_cert_arn
+  --parameter-overrides ThingName="$thing_name" CertificateArn="$principal_cert_arn"
 
 # The final step is to query AWS IoT Core for the data endpoint.
 endpointAddress=$(aws iot describe-endpoint \
