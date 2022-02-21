@@ -39,7 +39,8 @@ get_certificate_arn() {
       --certificate-id $(cat $principal_cert_id_path) \
       --query certificateDescription.certificateArn \
       --output text 2>&1
-    exit 0)
+    exit 0
+  )
 }
 
 # -----------------------------------------------------------------------------
@@ -52,7 +53,7 @@ mkdir -p $cert_directory
 # is to download the AWS CA certificate to a new directory called 'cert'.
 if [ ! -f "$ca_cert_path" ]; then
   echo "Downloading Amazon root CA certificate..."
-  curl -s https://www.amazontrust.com/repository/AmazonRootCA1.pem > $ca_cert_path
+  curl -s https://www.amazontrust.com/repository/AmazonRootCA1.pem >$ca_cert_path
   echo "    $ca_cert_path"
 fi
 
@@ -78,7 +79,7 @@ if [ -z "$principal_cert_arn" ]; then
     --private-key-outfile $principal_key_path \
     --output text \
     --query certificateId \
-    > $principal_cert_id_path
+    >$principal_cert_id_path
 
   get_certificate_arn
   principal_cert_arn=$resp
