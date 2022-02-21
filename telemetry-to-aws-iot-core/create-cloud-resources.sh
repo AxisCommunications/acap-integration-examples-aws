@@ -36,7 +36,7 @@ export AWS_PAGER=
 get_certificate_arn() {
   resp=$(
     aws iot describe-certificate \
-      --certificate-id $(cat $principal_cert_id_path) \
+      --certificate-id "$(cat $principal_cert_id_path)" \
       --query certificateDescription.certificateArn \
       --output text 2>&1
     exit 0

@@ -1,3 +1,7 @@
+# Unordered list indentation
+MD007:
+  indent: 4
+
 # Line length
 # Reason: Most editors wrap long lines, and long lines doesn't affect rendered Markdown.
 MD013: false
