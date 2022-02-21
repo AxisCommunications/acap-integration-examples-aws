@@ -10,7 +10,6 @@
 
 This repository focuses on providing examples where we create the integration between the Axis device and Amazon Web Services. If you are interested in camera applications and the different API surfaces an application can use, please visit our related repository [AxisCommunications/acap3-examples](https://github.com/AxisCommunications/acap3-examples/).
 
-
 ## Example applications
 
 The repository contains a set of examples, each tailored towards a specific problem. All examples have a README file in its directory which shows overview, example directory structure and step-by-step instructions on how to deploy the AWS infrastructure and how to configure the camera to interact with AWS.
@@ -18,9 +17,9 @@ The repository contains a set of examples, each tailored towards a specific prob
 If you find yourself wishing there was another example more relevant to your use case, please don't hesitate to [start a discussion](https://github.com/AxisCommunications/acap-integration-examples-aws/discussions/new) or [open a new issue](https://github.com/AxisCommunications/acap-integration-examples-aws/issues/new/choose).
 
 - [images-to-aws-s3](./images-to-aws-s3/)
-    - This example covers sending images from a camera to AWS S3
+  - This example covers sending images from a camera to AWS S3
 - [telemetry-to-aws-iot-core](./telemetry-to-aws-iot-core/)
-    - This example covers sending telemetry from a camera to AWS IoT Core
+  - This example covers sending telemetry from a camera to AWS IoT Core
 
 ## License
 

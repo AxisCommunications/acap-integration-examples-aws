@@ -132,11 +132,11 @@ Now let's navigate to the *Rules* tab. Here we'll finally create a rule that com
 
 - **Name**: `Images to AWS S3`
 - **Condition**: `Pulse`
-    - **Pulse**: `Every Minute`
+  - **Pulse**: `Every Minute`
 - **Action**: `Send images through HTTPS`
-    - **Recipient**: `AWS S3`
-    - **Maximum images**: `1`
-    - **Custom CGI parameters**: Back when we deployed the AWS resources using CloudFormation stacks we talked about output parameters. The output parameter `AccessToken` points to a secret in AWS Secrets Manager. Follow the link, retrieve the secret value and format it according to `accessToken=<secret value>`. E.g. if the secret value is `FooBar` then the value you should enter here is `accessToken=FooBar`. Please note that copying the secret from AWS Secrets Manager sometimes adds a space in the beginning of the secret. Please make sure to remove this space before saving the rule.
+  - **Recipient**: `AWS S3`
+  - **Maximum images**: `1`
+  - **Custom CGI parameters**: Back when we deployed the AWS resources using CloudFormation stacks we talked about output parameters. The output parameter `AccessToken` points to a secret in AWS Secrets Manager. Follow the link, retrieve the secret value and format it according to `accessToken=<secret value>`. E.g. if the secret value is `FooBar` then the value you should enter here is `accessToken=FooBar`. Please note that copying the secret from AWS Secrets Manager sometimes adds a space in the beginning of the secret. Please make sure to remove this space before saving the rule.
 
 Click the *Save* button.
 
