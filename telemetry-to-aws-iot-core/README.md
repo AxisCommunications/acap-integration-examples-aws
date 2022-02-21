@@ -14,11 +14,11 @@
 - [Prerequisites](#prerequisites)
 - [File structure](#file-structure)
 - [Instructions](#instructions)
-  - [Deploy AWS resources](#deploy-aws-resources)
-  - [Configure the camera](#configure-the-camera)
+    - [Deploy AWS resources](#deploy-aws-resources)
+    - [Configure the camera](#configure-the-camera)
 - [Cleanup](#cleanup)
 - [Troubleshooting](#troubleshooting)
-  - [MQTT client cannot connect to AWS IoT Core](#mqtt-client-cannot-connect-to-aws-iot-core)
+    - [MQTT client cannot connect to AWS IoT Core](#mqtt-client-cannot-connect-to-aws-iot-core)
 - [License](#license)
 
 ## Overview
@@ -66,7 +66,7 @@ cd acap-integration-examples-aws/telemetry-to-aws-iot-core
 Let's deploy the AWS resources required to receive telemetry from a camera. The bash script `create-cloud-resources.sh` should be called with the following positional arguments.
 
 1. **Stack name**: The name of the AWS CloudFormation stack, e.g. `axis-device-telemetry`
-2. **Thing name**: The name of the AWS IoT Core Thing, e.g. `device01`
+1. **Thing name**: The name of the AWS IoT Core Thing, e.g. `device01`
 
 The following output indicates that all resources have been created successfully.
 
@@ -118,15 +118,15 @@ The next step is to configure the MQTT client on the camera.
 
 1. In the user interface of the camera, select *Settings* -> *System* -> *MQTT*
 1. In the *Server* section use the following settings
-  - **Protocol**: `MQTT over SSL`
-  - **Host**: `<aws iot core host>`, i.e. the host echoed in the final step of the previous chapter
-  - **Port**: `8883`
+    - **Protocol**: `MQTT over SSL`
+    - **Host**: `<aws iot core host>`, i.e. the host echoed in the final step of the previous chapter
+    - **Port**: `8883`
 1. Under the *Certificate* section use the following settings
-  - **Client certificate**: `<thing name>`, e.g. `device01`
-  - **CA certificate**: `AmazonRootCA1`
-  - **Validate server certificate**: `checked`
+    - **Client certificate**: `<thing name>`, e.g. `device01`
+    - **CA certificate**: `AmazonRootCA1`
+    - **Validate server certificate**: `checked`
 1. Under the *Policies* section use the following sections
-  - **Client ID**: `<thing name>`, e.g. `device01`
+    - **Client ID**: `<thing name>`, e.g. `device01`
 1. Click *Save*
 
 Once the settings are saved, click on *Connect* on the top of the MQTT settings page.
@@ -135,22 +135,22 @@ Let's continue with configuring the events the camera should send AWS IoT Core. 
 
 1. In the user interface of the camera, select *Settings* -> *System* -> *Events* -> *Device events* -> *Schedules*
 1. Create a new schedule with the following settings
-  - **Type**: `Pulse`
-  - **Name**: `Every 5 seconds`
-  - **Repeat every**: `5 Seconds`
+    - **Type**: `Pulse`
+    - **Name**: `Every 5 seconds`
+    - **Repeat every**: `5 Seconds`
 1. Click *Save*
 
 Finally select pulses to be the event type the camera sends to AWS IoT Core.
 
 1. While still in *Events*, select *MQTT events*
 1. In the *Publish* section use the following settings
-  - **Use default condition prefix**: `Off`
-  - **Custom condition prefix**: `<device identity name>`, e.g. `device01`
-  - **Include condition name**: `checked`
-  - **Include condition namespaces**: `unchecked`
-  - **Include serial number in payload**: `checked`
+    - **Use default condition prefix**: `Off`
+    - **Custom condition prefix**: `<device identity name>`, e.g. `device01`
+    - **Include condition name**: `checked`
+    - **Include condition namespaces**: `unchecked`
+    - **Include serial number in payload**: `checked`
 1. In the *Event filter list* section use the following settings
-  - **Condition**: `Pulse`
+    - **Condition**: `Pulse`
 1. Click on *Save*
 
 At this point the camera is sending a new event every 5 seconds to AWS IoT Core. Proceed with viewing the events in AWS IoT Core in the AWS Console.
