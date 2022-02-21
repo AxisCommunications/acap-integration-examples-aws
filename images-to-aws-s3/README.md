@@ -52,6 +52,7 @@ For more information regarding the relevance of this sample, please see the foll
 
 ## File structure
 
+<!-- markdownlint-disable MD040 -->
 ```
 images-to-aws-s3
 ├── src
@@ -75,7 +76,7 @@ The instructions are divided into two parts. The first part covers deploying the
 
 To start off, make sure to clone the repository and navigate into the example directory.
 
-```bash
+```sh
 git clone https://github.com/AxisCommunications/acap-integration-examples-aws.git
 cd acap-integration-examples-aws/images-to-aws-s3
 ```
@@ -86,7 +87,7 @@ Let's build and deploy the AWS resources receiving the images sent from an Axis 
 
 To build and deploy your application for the first time, run the following commands in your shell.
 
-```bash
+```sh
 sam build
 sam deploy --guided
 ```
@@ -145,7 +146,7 @@ At this point the rule will become active and send an image to AWS S3 every minu
 
 To delete the deployed AWS resources, delete the CloudFormation stack either via the AWS Console or via the AWS CLI using the following command.
 
-```bash
+```sh
 aws cloudformation delete-stack --stack-name <CloudFormation stack name>
 ```
 

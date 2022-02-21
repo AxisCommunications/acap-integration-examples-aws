@@ -43,6 +43,7 @@ An Axis camera has an internal MQTT client that will connect to IoT Core in AWS.
 
 ## File structure
 
+<!-- markdownlint-disable MD040 -->
 ```
 telemetry-to-aws-iot-core
 ├── create-cloud-resources.sh - Bash script that creates AWS resources and certificates for secure communication between camera and cloud
@@ -55,7 +56,7 @@ The instructions are divided into two parts. The first part covers deploying the
 
 To start off, make sure to clone the repository and navigate into the example directory.
 
-```bash
+```sh
 git clone https://github.com/AxisCommunications/acap-integration-examples-aws.git
 cd acap-integration-examples-aws/telemetry-to-aws-iot-core
 ```
@@ -158,7 +159,7 @@ At this point the camera is sending a new event every 5 seconds to AWS IoT Core.
 
 To delete the deployed AWS resources, delete the AWS CloudFormation stack either via the AWS Console or via the AWS CLI using the following command.
 
-```bash
+```sh
 aws cloudformation delete-stack --stack-name <stack name>
 ```
 
