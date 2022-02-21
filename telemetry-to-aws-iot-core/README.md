@@ -91,7 +91,7 @@ $ ./create-cloud-resources.sh axis-device-telemetry device01
 > Client id:  device01
 ```
 
-We will use the MQTT host and client id in the upcoming chapter where we configure the camera.
+We will use the MQTT host and client ID in the upcoming chapter where we configure the camera.
 
 ### Configure the camera
 
@@ -125,7 +125,7 @@ The next step is to configure the MQTT client on the camera.
     - **CA certificate**: `AmazonRootCA1`
     - **Validate server certificate**: `checked`
 1. Under the *Policies* section use the following sections
-    - **Client id**: `<thing name>`, e.g. `device01`
+    - **Client ID**: `<thing name>`, e.g. `device01`
 1. Click *Save*
 
 Once the settings are saved, click on *Connect* on the top of the MQTT settings page.
