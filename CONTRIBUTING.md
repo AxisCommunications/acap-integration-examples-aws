@@ -4,6 +4,7 @@
 All types of contributions are encouraged and valued. See the [Table of contents](#table-of-contents) for different ways to help and details about how this project handles them. Please make sure to read the relevant section before making your contribution. It will make it a lot easier for us maintainers and smooth out the experience for all involved. We look forward to your contributions.
 
 > And if you like the project, but just don't have time to contribute, that's fine. There are other easy ways to support the project and show your appreciation, which we would also be very happy about:
+>
 > - Star the project
 > - Tweet about it
 > - Refer this project in your project's readme
@@ -14,9 +15,9 @@ All types of contributions are encouraged and valued. See the [Table of contents
 
 - [I have a question](#i-have-a-question)
 - [I want to contribute](#i-want-to-contribute)
-  - [Reporting bugs](#reporting-bugs)
-  - [Suggesting enhancements](#suggesting-enhancements)
-  - [Your first code contribution](#your-first-code-contribution)
+    - [Reporting bugs](#reporting-bugs)
+    - [Suggesting enhancements](#suggesting-enhancements)
+    - [Your first code contribution](#your-first-code-contribution)
 
 ## I have a question
 
@@ -43,13 +44,13 @@ A good bug report shouldn't leave others needing to chase you up for more inform
 - To see if other users have experienced (and potentially already solved) the same issue you are having, check if there is not already a bug report existing for your bug or error in the [bug tracker][issues_bugs].
 - Also make sure to search the internet to see if users outside of the GitHub community have discussed the issue.
 - Collect information about the bug:
-  - Camera model
-  - Camera firmware version
-  - Stack trace
-  - OS, platform and version (Windows, Linux, macOS, x86, ARM)
-  - Version of the interpreter, compiler, SDK, runtime environment, package manager, depending on what seems relevant
-  - Possibly your input and the output
-  - Can you reliably reproduce the issue? And can you also reproduce it with older versions?
+    - Camera model
+    - Camera firmware version
+    - Stack trace
+    - OS, platform and version (Windows, Linux, macOS, x86, ARM)
+    - Version of the interpreter, compiler, SDK, runtime environment, package manager, depending on what seems relevant
+    - Possibly your input and the output
+    - Can you reliably reproduce the issue? And can you also reproduce it with older versions?
 
 #### How do I submit a good bug report?
 

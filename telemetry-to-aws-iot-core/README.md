@@ -4,6 +4,7 @@
 # Telemetry to AWS IoT Core
 
 [![Build telemetry-to-aws-iot-core](https://github.com/AxisCommunications/acap-integration-examples-aws/actions/workflows/telemetry-to-aws-iot-core.yml/badge.svg)](https://github.com/AxisCommunications/acap-integration-examples-aws/actions/workflows/telemetry-to-aws-iot-core.yml)
+[![Lint codebase](https://github.com/AxisCommunications/acap-integration-examples-aws/actions/workflows/lint.yml/badge.svg)](https://github.com/AxisCommunications/acap-integration-examples-aws/actions/workflows/lint.yml)
 ![Ready for use in production](https://img.shields.io/badge/Ready%20for%20use%20in%20production-Yes-brightgreen)
 
 <!-- omit in toc -->
@@ -13,11 +14,11 @@
 - [Prerequisites](#prerequisites)
 - [File structure](#file-structure)
 - [Instructions](#instructions)
-  - [Deploy AWS resources](#deploy-aws-resources)
-  - [Configure the camera](#configure-the-camera)
+    - [Deploy AWS resources](#deploy-aws-resources)
+    - [Configure the camera](#configure-the-camera)
 - [Cleanup](#cleanup)
 - [Troubleshooting](#troubleshooting)
-  - [MQTT client cannot connect to AWS IoT Core](#mqtt-client-cannot-connect-to-aws-iot-core)
+    - [MQTT client cannot connect to AWS IoT Core](#mqtt-client-cannot-connect-to-aws-iot-core)
 - [License](#license)
 
 ## Overview
@@ -42,6 +43,7 @@ An Axis camera has an internal MQTT client that will connect to IoT Core in AWS.
 
 ## File structure
 
+<!-- markdownlint-disable MD040 -->
 ```
 telemetry-to-aws-iot-core
 ├── create-cloud-resources.sh - Bash script that creates AWS resources and certificates for secure communication between camera and cloud
@@ -54,7 +56,7 @@ The instructions are divided into two parts. The first part covers deploying the
 
 To start off, make sure to clone the repository and navigate into the example directory.
 
-```bash
+```sh
 git clone https://github.com/AxisCommunications/acap-integration-examples-aws.git
 cd acap-integration-examples-aws/telemetry-to-aws-iot-core
 ```
@@ -64,7 +66,7 @@ cd acap-integration-examples-aws/telemetry-to-aws-iot-core
 Let's deploy the AWS resources required to receive telemetry from a camera. The bash script `create-cloud-resources.sh` should be called with the following positional arguments.
 
 1. **Stack name**: The name of the AWS CloudFormation stack, e.g. `axis-device-telemetry`
-2. **Thing name**: The name of the AWS IoT Core Thing, e.g. `device01`
+1. **Thing name**: The name of the AWS IoT Core Thing, e.g. `device01`
 
 The following output indicates that all resources have been created successfully.
 
@@ -90,7 +92,7 @@ $ ./create-cloud-resources.sh axis-device-telemetry device01
 > Client id:  device01
 ```
 
-We will use the MQTT host and client id in the upcoming chapter where we configure the camera.
+We will use the MQTT host and client ID in the upcoming chapter where we configure the camera.
 
 ### Configure the camera
 
@@ -124,7 +126,7 @@ The next step is to configure the MQTT client on the camera.
     - **CA certificate**: `AmazonRootCA1`
     - **Validate server certificate**: `checked`
 1. Under the *Policies* section use the following sections
-    - **Client id**: `<thing name>`, e.g. `device01`
+    - **Client ID**: `<thing name>`, e.g. `device01`
 1. Click *Save*
 
 Once the settings are saved, click on *Connect* on the top of the MQTT settings page.
@@ -157,7 +159,7 @@ At this point the camera is sending a new event every 5 seconds to AWS IoT Core.
 
 To delete the deployed AWS resources, delete the AWS CloudFormation stack either via the AWS Console or via the AWS CLI using the following command.
 
-```bash
+```sh
 aws cloudformation delete-stack --stack-name <stack name>
 ```
 

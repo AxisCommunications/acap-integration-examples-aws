@@ -10,7 +10,6 @@
 
 This repository focuses on providing examples where we create the integration between the Axis device and Amazon Web Services. If you are interested in camera applications and the different API surfaces an application can use, please visit our related repository [AxisCommunications/acap3-examples](https://github.com/AxisCommunications/acap3-examples/).
 
-
 ## Example applications
 
 The repository contains a set of examples, each tailored towards a specific problem. All examples have a README file in its directory which shows overview, example directory structure and step-by-step instructions on how to deploy the AWS infrastructure and how to configure the camera to interact with AWS.
