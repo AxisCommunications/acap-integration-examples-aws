@@ -185,6 +185,10 @@ Finally select pulses to be the event type the camera sends to AWS IoT Core.
 
 At this point the camera is sending a new event every 5 seconds to AWS IoT Core. Proceed with viewing the events in AWS IoT Core in the AWS Console.
 
+1. Navigate to the [AWS IoT Core](https://console.aws.amazon.com/iot) service in the AWS Console.
+1. On the left side, expand *Test* and select the *MQTT test client*
+1. In the *Subscribe to a topic* tab, enter the topic wildcard character `#` anc click the *Subscribe* button
+
 ## Cleanup
 
 To delete the deployed AWS resources, delete the AWS CloudFormation stack either via the AWS Console or via the AWS CLI using the following command.
