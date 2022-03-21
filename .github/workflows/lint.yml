@@ -19,3 +19,4 @@ jobs:
           LINTER_RULES_PATH: /
           VALIDATE_CLOUDFORMATION: false
           VALIDATE_JAVASCRIPT_STANDARD: false
+          MARKDOWN_CONFIG_FILE: .markdownlint.yml
