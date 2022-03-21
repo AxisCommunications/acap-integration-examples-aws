@@ -1,5 +1,6 @@
 {
   "recommendations": [
+    "DavidAnson.vscode-markdownlint",
     "editorconfig.editorconfig",
     "esbenp.prettier-vscode",
     "redhat.vscode-yaml",
