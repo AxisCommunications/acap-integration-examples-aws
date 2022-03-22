@@ -175,7 +175,7 @@ Finally select pulses to be the event type the camera sends to AWS IoT Core.
 1. While still in *Events*, select *MQTT events*
 1. In the *Publish* section use the following settings
     - **Use default condition prefix**: `Off`
-    - **Custom condition prefix**: `<device identity name>`, e.g. `device01`
+    - **Custom condition prefix**: `<thing name>`, e.g. `device01`
     - **Include condition name**: `checked`
     - **Include condition namespaces**: `unchecked`
     - **Include serial number in payload**: `checked`
