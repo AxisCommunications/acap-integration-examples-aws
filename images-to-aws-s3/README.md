@@ -1,4 +1,4 @@
-*Copyright (C) 2021, Axis Communications AB, Lund, Sweden. All Rights Reserved.*
+*Copyright (C) 2021-2022, Axis Communications AB, Lund, Sweden. All Rights Reserved.*
 
 <!-- omit in toc -->
 # Sending images from a camera to AWS S3
