@@ -47,7 +47,7 @@ For more information regarding the relevance of this sample, please see the foll
 
 ## Prerequisites
 
-- A network camera from Axis Communications (example has been verified to work on a single channel camera with firmware version >=7.30.1.1)
+- A network camera from Axis Communications (example has been verified to work on a single channel camera with firmware version >=9.80)
 - Node.js ([install Node.js 14](https://nodejs.org/en/))
 - AWS SAM CLI ([install](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html))
 
