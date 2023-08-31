@@ -11,5 +11,8 @@
   },
   "bugs": {
     "url": "https://github.com/AxisCommunications/acap-integration-examples-aws/issues"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1448.0"
   }
 }
