@@ -163,12 +163,12 @@ Once the settings are saved, click on *Connect* on the top of the MQTT settings 
 
 Let's continue with configuring the events the camera should send AWS IoT Core. For the sake of simplicity we create a new schedule that triggers an event every 5 seconds, because the event is predictable and doesn't require any physical access to the camera. You can change this event to any type sent by the camera or an installed ACAP application.
 
-1. In the user interface of the camera, select *Settings* -> *System* -> *Events* -> *Device events* -> *Schedules*
-1. Create a new schedule with the following settings
+1. In the user interface of the camera, select *Settings* -> *System* -> *Events* -> *Schedules*
+2. Create a new schedule with the following settings
     - **Type**: `Pulse`
     - **Name**: `Every 5 seconds`
     - **Repeat every**: `5 Seconds`
-1. Click *Save*
+3. Click *Save*
 
 Finally select pulses to be the event type the camera sends to AWS IoT Core.
 
