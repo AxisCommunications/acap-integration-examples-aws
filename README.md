@@ -4,7 +4,7 @@
 
 ## Introduction
 
-[AXIS Camera Application Platform (ACAP)](https://www.axis.com/support/developer-support/axis-camera-application-platform) is an open application platform that enables members of [Axis Application Development Partner (ADP)](https://www.axis.com/partners/adp-partner-program) Program to develop applications that can be downloaded and installed on Axis network cameras and video encoders.
+[AXIS Camera Application Platform (ACAP)](https://www.axis.com/support/developer-support/axis-camera-application-platform) is an open platform that enables developer to build applications that can be installed on Axis network cameras and video encoders.
 
 [Amazon Web Services (AWS)](https://aws.amazon.com) is a platform in the cloud that provides highly reliable, scalable, low-cost infrastructure to individuals, companies, and governments.
 
