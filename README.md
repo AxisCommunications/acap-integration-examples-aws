@@ -4,7 +4,7 @@
 
 ## Introduction
 
-The [Axis Developer Documentation](https://developer.axis.com/) serves as a comprehensive resource hub for developers and solution builders aiming to build applications tailored for Axis network-connected devices.
+[Axis Developer Documentation](https://developer.axis.com/) serves as a comprehensive resource hub for developers and solution builders aiming to build applications tailored for Axis network-connected devices.
 
 [Amazon Web Services (AWS)](https://aws.amazon.com) is a platform in the cloud that provides highly reliable, scalable, low-cost infrastructure to individuals, companies, and governments.
 
