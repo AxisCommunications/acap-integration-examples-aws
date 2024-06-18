@@ -1,5 +1,8 @@
 *Copyright (C) 2021, Axis Communications AB, Lund, Sweden. All Rights Reserved.*
 
+<!-- omit in toc -->
+# This repository has been archived, and its content moved to [Axis Developer Documentation](https://developer.axis.com/)
+
 # Integration between Axis devices and Amazon Web Services (AWS)
 
 ## Introduction

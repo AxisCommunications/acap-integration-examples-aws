@@ -1,6 +1,9 @@
 *Copyright (C) 2021, Axis Communications AB, Lund, Sweden. All Rights Reserved.*
 
 <!-- omit in toc -->
+# This example has been moved to [Axis Developer Documentation](https://developer.axis.com/analytics/how-to-guides/send-telemetry-to-aws-iot-core)
+
+<!-- omit in toc -->
 # Telemetry to AWS IoT Core
 
 [![Build telemetry-to-aws-iot-core](https://github.com/AxisCommunications/acap-integration-examples-aws/actions/workflows/telemetry-to-aws-iot-core.yml/badge.svg)](https://github.com/AxisCommunications/acap-integration-examples-aws/actions/workflows/telemetry-to-aws-iot-core.yml)
